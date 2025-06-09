@@ -18,7 +18,6 @@ import matplotlib.pyplot as plt
 import glob
 import rioxarray as rio
 import plotly.graph_objects as go
-import pandas as pd
 import plotly.colors as pcolors
 from dash import dcc, html, Input, Output, Dash
 
