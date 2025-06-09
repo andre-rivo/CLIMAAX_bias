@@ -6,6 +6,9 @@ geopandas
 matplotlib
 numpy
 rioxarray
+scipy
+netcdf4
+h5netcdf
 xarray
 gunicorn
 dash-tools
