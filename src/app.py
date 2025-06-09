@@ -31,7 +31,7 @@ from dash import dcc, html, Input, Output, Dash
 #import eobs tas
 
 coords = ['longitude','latitude']
-eobs_tas = xr.open_dataset('tg_ens_mean_0.1deg_reg_v30.0e_REMAP_FAIZAN_mean1971-2000.nc')
+eobs_tas = xr.open_dataset('../../tg_ens_mean_0.1deg_reg_v30.0e_REMAP_FAIZAN_mean1971-2000.nc')
 eobs_tas=eobs_tas.assign_coords({coord: eobs_tas[coord].round(3) for coord in coords})
     
 
@@ -41,7 +41,7 @@ eobs_tas=eobs_tas.assign_coords({coord: eobs_tas[coord].round(3) for coord in co
 
 #import eobs pr
 coords = ['longitude','latitude']
-eobs_pr = xr.open_dataset('rr_ens_mean_0.1deg_reg_v30.0e_REMAP_FAIZAN_MEAN_YEARSUM_1971-2000.nc')
+eobs_pr = xr.open_dataset('../../rr_ens_mean_0.1deg_reg_v30.0e_REMAP_FAIZAN_MEAN_YEARSUM_1971-2000.nc')
 eobs_pr=eobs_pr.assign_coords({coord: eobs_pr[coord].round(3) for coord in coords})
     
 
@@ -91,7 +91,7 @@ names_list = []
 for gcm in gcm_list:
     for rcm in tqdm(rcm_list):
         try:
-            string=f'models_faizan/all_projections/tas*{gcm}*{rcm}*1971_2000_timmean.nc4'
+            string=f'../../models_faizan/all_projections/tas*{gcm}*{rcm}*1971_2000_timmean.nc4'
             files = glob.glob(string)
             bias_list_tas.append(mean_bias_tas(files))
             names_list.append(str(gcm)+'_'+str(rcm))
@@ -110,7 +110,7 @@ bias_list_pr=[]
 for gcm in gcm_list:
     for rcm in tqdm(rcm_list):
         try:
-            string=f'models_faizan/all_projections/pr*{gcm}*{rcm}*1971_2000_timmean.nc4'
+            string=f'../../models_faizan/all_projections/pr*{gcm}*{rcm}*1971_2000_timmean.nc4'
             bias_list_pr.append(mean_bias_pr(string))    
         except OSError:
             print(f"No files found for {gcm} and {rcm}, moving to next combination.")
@@ -122,7 +122,7 @@ for gcm in gcm_list:
 
 #creates lists of bias for every NUTS2 region, skips region outside of CORDEX domain
 
-regions_gdf = gpd.read_file('NUTS_2_SHAPE.shp', encoding='utf-8')
+regions_gdf = gpd.read_file('../../NUTS_2_SHAPE.shp', encoding='utf-8')
 crs = regions_gdf.crs
 
 
@@ -187,7 +187,7 @@ median_bias_pr = [i.weighted(weights[num]).quantile(0.5, dim=('latitude', 'longi
 # In[12]:
 
 
-regions_gdf = gpd.read_file('NUTS_2_SHAPE.shp', encoding='utf-8')
+regions_gdf = gpd.read_file('../../NUTS_2_SHAPE.shp', encoding='utf-8')
 
 regions_gdf = regions_gdf['geometry']
 
