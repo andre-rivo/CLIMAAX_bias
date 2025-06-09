@@ -1,8 +1,10 @@
+setuptools>=67
+wheel
+docopt==0.6.2
 dash
 geopandas
 matplotlib
 numpy
-plotly
 rioxarray
 xarray
 gunicorn
