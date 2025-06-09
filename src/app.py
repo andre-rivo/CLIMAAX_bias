@@ -17,10 +17,8 @@ import xarray as xr
 import matplotlib.pyplot as plt
 import glob
 import rioxarray as rio
-from tqdm import tqdm
 import plotly.graph_objects as go
 import pandas as pd
-import plotly.express as px
 import plotly.colors as pcolors
 from dash import dcc, html, Input, Output, Dash
 
@@ -89,7 +87,7 @@ bias_list_tas=[]
 names_list = []
 
 for gcm in gcm_list:
-    for rcm in tqdm(rcm_list):
+    for rcm in rcm_list:
         try:
             string=f'../../models_faizan/all_projections/tas*{gcm}*{rcm}*1971_2000_timmean.nc4'
             files = glob.glob(string)
@@ -108,7 +106,7 @@ bias_list_pr=[]
 #coords = ['rlon','rlat']
 
 for gcm in gcm_list:
-    for rcm in tqdm(rcm_list):
+    for rcm in rcm_list:
         try:
             string=f'../../models_faizan/all_projections/pr*{gcm}*{rcm}*1971_2000_timmean.nc4'
             bias_list_pr.append(mean_bias_pr(string))    
@@ -213,7 +211,7 @@ color_list = cmap(np.linspace(0, 1,combinations+1))
 
 
 #loop through all regions
-for region in tqdm(range(len(regions_ex2))):
+for region in range(len(regions_ex2)):
 
 
     #make one figure for each region
@@ -274,7 +272,7 @@ colorscale = pcolors.qualitative.Light24
 color_list = [pcolors.sample_colorscale(colorscale, i / combinations) for i in range(combinations + 1)]
 
 # Loop through all regions
-for region in tqdm(range(len(regions_ex2))):
+for region in range(len(regions_ex2)):
     region_name = regions_ex2['NUTS_NAME'][region]
     
     # Data collection for plotting
@@ -460,9 +458,6 @@ def display_details(clickData):
 # Run app
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-
-# In[ ]:
 
 
 
